@@ -36,7 +36,8 @@ class Courses : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            //viewModel.insertCourse(Course(0, name = "My course 1", location = "a random ZOOM link"))
+            viewModel.insertCourse(Course(0, name = "My course 4", location = "a random ZOOM link 4"))
+            viewModel.insertCourse(Course(0, name = "My course 5", location = "a random ZOOM link 5"))
             binding.textCoursesCount.text = viewModel.getAllCourses().size.toString()
 
         }
