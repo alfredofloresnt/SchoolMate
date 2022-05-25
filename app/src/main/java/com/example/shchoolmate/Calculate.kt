@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -50,6 +51,14 @@ class Calculate : Fragment() {
                 updateCourse(courses, selectedCourseIndex)
             }
         }
+
+        for (i in 1..5) {
+            val dynamicTextview = TextView(activity)
+            //val score
+            dynamicTextview.text = "Dynamic text"
+            binding.calculateLinearLayout.addView(dynamicTextview)
+        }
+
     }
 
     fun updateCourse(courses: List<Course>, index: Int){
