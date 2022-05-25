@@ -1,5 +1,8 @@
 package com.example.schoolmate
 
+import android.graphics.Color
+import android.icu.util.Calendar
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +23,8 @@ class HourAdapter (var hours: List<Hour>): RecyclerView.Adapter<HourAdapter.View
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
-            hourText.text = hours[position].hour
+            val i = hours[position].hour
+            hourText.text = "$i:00"
         }
     }
 
