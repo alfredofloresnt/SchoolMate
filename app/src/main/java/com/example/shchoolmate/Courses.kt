@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.schoolmate.HourAdapter
 import com.example.shchoolmate.databinding.FragmentCoursesBinding
 import kotlinx.coroutines.launch
 
@@ -35,13 +37,18 @@ class Courses : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         lifecycleScope.launch {
             viewModel.insertCourse(Course(0, name = "My course 4", location = "a random ZOOM link 4"))
             viewModel.insertCourse(Course(0, name = "My course 5", location = "a random ZOOM link 5"))
-            binding.textCoursesCount.text = viewModel.getAllCourses().size.toString()
-
+            // binding.textCoursesCount.text = viewModel.getAllCourses().size.toString()
         }
+
+        val adapter = HourAdapter((0..23).map { Hour("$it:00") })
+        binding.dayRecyclerView.adapter = adapter
+        binding.dayRecyclerView.layoutManager = LinearLayoutManager(activity)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
