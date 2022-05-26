@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddAct">
+    tools:context=".Add">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,6 @@
             android:padding="15dp"
             android:text="Add a course!"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +34,7 @@
     <LinearLayout
         android:id="@+id/formsLayout"
         android:layout_width="match_parent"
+        android:paddingHorizontal="60dp"
         android:layout_height="wrap_content"
         android:minHeight="300dp"
         android:orientation="vertical"
@@ -45,59 +45,142 @@
         <EditText
             android:id="@+id/editTextTitulo"
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Titulo" />
+            android:drawableLeft="@drawable/ic_baseline_school_24"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
+            android:hint="Title" />
 
         <EditText
             android:id="@+id/editTextLocation"
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
             android:hint="Location" />
 
         <EditText
             android:id="@+id/startTime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="none"
             android:focusable="false"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_access_time_24"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="5dp"
             android:hint="Start Time" />
 
         <EditText
             android:id="@+id/endTime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:ems="10"
             android:inputType="none"
             android:focusable="false"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_access_time_filled_24"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="5dp"
             android:hint="End Time" />
 
         <EditText
             android:id="@+id/startDate"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="none"
             android:focusable="false"
-            android:hint="Start Date" />
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="5dp"
+            android:hint="Since" />
 
         <EditText
             android:id="@+id/endDate"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="none"
             android:focusable="false"
-            android:hint="End Date" />
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+            android:drawablePadding="15dp"
+            android:layout_marginVertical="5dp"
+            android:hint="Until" />
 
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/textsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formsLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:text="SU"
+            android:textSize="14sp"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="MO"
+            android:layout_marginHorizontal="15dp"
+            android:textSize="14sp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="TU"
+            android:layout_marginHorizontal="15dp"
+            android:textSize="14sp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="WE"
+            android:layout_marginHorizontal="15dp"
+            android:textSize="14sp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="TH"
+            android:layout_marginHorizontal="15dp"
+            android:textSize="14sp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="FR"
+            android:layout_marginHorizontal="15dp"
+            android:textSize="14sp"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="SA"
+            android:textSize="14sp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_height="wrap_content">
+        </TextView>
     </LinearLayout>
 
     <LinearLayout
@@ -147,67 +230,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/textsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/formsLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:text="SU"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="MO"
-            android:layout_marginHorizontal="15dp"
-
-            android:layout_height="wrap_content">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="TU"
-            android:layout_marginHorizontal="15dp"
-
-            android:layout_height="wrap_content">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="WE"
-            android:layout_marginHorizontal="15dp"
-
-            android:layout_height="wrap_content">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="TH"
-            android:layout_marginHorizontal="15dp"
-
-            android:layout_height="wrap_content">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="FR"
-            android:layout_marginHorizontal="15dp"
-
-            android:layout_height="wrap_content">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="SA"
-            android:layout_marginHorizontal="15dp"
-            android:layout_height="wrap_content">
-        </TextView>
-    </LinearLayout>
-
-
-    <LinearLayout
         android:id="@+id/actionsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -220,19 +242,12 @@
 
 
         <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:text="Cancel" />
-
-        <Button
             android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:backgroundTint="@color/secondaryColor"
             android:text="Add" />
+
 
     </LinearLayout>
 

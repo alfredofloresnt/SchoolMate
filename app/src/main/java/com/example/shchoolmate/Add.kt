@@ -2,22 +2,36 @@ package com.example.shchoolmate
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.icu.util.Calendar
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.shchoolmate.databinding.ActivityAddBinding
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import com.example.shchoolmate.databinding.FragmentAddBinding
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 
 
-class AddAct : AppCompatActivity() {
+class Add : Fragment() {
 
-    private lateinit var binding: ActivityAddBinding
+    private var _binding: FragmentAddBinding? = null
+    private val binding get () = _binding!!
+
+    private val viewModel: CoursesViewModel by activityViewModels {
+        CoursesViewModelFactory(
+            (activity?.application as MyInitApp).database.courseDao()
+        )
+    }
 
     data class myDate(var minute: Int, var hour: Int,var day: Int, var month: Int, var year: Int)
 
-    val startDate  = myDate(-1,-1,-1,-1,-1)
-    val endDate = myDate(-1,-1,-1,-1,-1)
+    var startDate  = myDate(-1,-1,-1,-1,-1)
+    var endDate = myDate(-1,-1,-1,-1,-1)
 
     fun formatTime(h : Int, m : Int) : String {
         if(h<10) {
@@ -46,7 +60,7 @@ class AddAct : AppCompatActivity() {
 
     fun handleSetTime(h: Int, m: Int, start: Boolean){
         if(m != 0 && m !=30){ // only possible minutes
-            Toast.makeText(this, "Only full and half hours please", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Only full and half hours please", Toast.LENGTH_SHORT).show()
         }else{
             if(start){
                 binding.startTime.setText(formatTime(h,m))
@@ -54,7 +68,7 @@ class AddAct : AppCompatActivity() {
                 startDate.hour = h
             }else{
                 if(startDate.minute + startDate.hour*60 >= m + h*60){
-                    Toast.makeText(this, "Make sure end time is after start time", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Make sure end time is after start time", Toast.LENGTH_SHORT).show()
                 }else{
                     binding.endTime.setText(formatTime(h,m))
                     endDate.minute = m
@@ -71,15 +85,15 @@ class AddAct : AppCompatActivity() {
         val hour: Int = cldr.get(Calendar.HOUR_OF_DAY)
         val minutes: Int = cldr.get(Calendar.MINUTE)
         if(start){
-             val picker = TimePickerDialog(this,
+            val picker = TimePickerDialog(activity,
                 { _, sHour, sMinute ->  handleSetTime(sHour, sMinute, start)}, hour, minutes, true
             )
             picker.show()
         }else{
             if(startDate.minute == -1 && startDate.hour == -1){
-                Toast.makeText(this, "Please enter start time first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Please enter start time first", Toast.LENGTH_SHORT).show()
             }else{
-                val picker = TimePickerDialog(this,
+                val picker = TimePickerDialog(activity,
                     { _, sHour, sMinute -> handleSetTime(sHour, sMinute, start) }, startDate.hour, startDate.minute, true
                 )
                 picker.show()
@@ -95,7 +109,7 @@ class AddAct : AppCompatActivity() {
             startDate.day = d
         }else{
             if(startDate.year*365 + startDate.month*30 + startDate.day >= y*365 + m*30 +d){
-                Toast.makeText(this, "Make sure end time is after start date", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Make sure end time is after start date", Toast.LENGTH_SHORT).show()
             }else{
                 binding.endDate.setText(formatDate(y,m,d))
                 endDate.year = y
@@ -104,6 +118,23 @@ class AddAct : AppCompatActivity() {
             }
         }
     }
+    fun clean(){
+        startDate  = myDate(-1,-1,-1,-1,-1)
+        endDate = myDate(-1,-1,-1,-1,-1)
+        binding.editTextTitulo.setText("")
+        binding.editTextLocation.setText("")
+        binding.startDate.setText("")
+        binding.startTime.setText("")
+        binding.endDate.setText("")
+        binding.endTime.setText("")
+        binding.sunday.isChecked =  false
+        binding.monday.isChecked = false
+        binding.tuesday.isChecked = false
+        binding.wednesday.isChecked = false
+        binding.thursday.isChecked = false
+        binding.friday.isChecked = false
+        binding.saturday.isChecked = false
+    }
 
     fun handleDate(start: Boolean){
         val cldr: Calendar = Calendar.getInstance()
@@ -111,15 +142,15 @@ class AddAct : AppCompatActivity() {
         val mNow: Int = cldr.get(Calendar.MONTH)
         val dNow: Int = cldr.get(Calendar.DAY_OF_MONTH)
 
-
         if(start){
-            val picker = DatePickerDialog(this, {_,y,m,d -> handleSetDate(y,m,d,start)}, yNow,mNow,dNow)
+            val picker = DatePickerDialog(activity as Context, {_, y,m,d -> handleSetDate(y,m,d,start)}, yNow, mNow, dNow)
             picker.show()
         }else{
             if(startDate.year == -1 && startDate.month == -1 && startDate.day ==-1){
-                Toast.makeText(this, "Please enter start date first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Please enter start date first", Toast.LENGTH_SHORT).show()
+
             }else{
-                val picker = DatePickerDialog(this, {_,y,m,d -> handleSetDate(y,m,d,start)}, startDate.year,startDate.month,startDate.day)
+                val picker = DatePickerDialog(activity as Context, {_,y,m,d -> handleSetDate(y,m,d,start)}, startDate.year,startDate.month,startDate.day)
                 picker.show()
             }
         }
@@ -133,13 +164,13 @@ class AddAct : AppCompatActivity() {
             binding.saturday.isChecked)
 
         if(titulo == "" || location == ""){
-            Toast.makeText(this, "Please fill all the text fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Please fill all the text fields", Toast.LENGTH_SHORT).show()
             return
         }
         if (startDate.year == -1 || startDate.month == -1 || startDate.day == -1 || startDate.hour == -1 || startDate.minute == -1
             || endDate.year == -1 || endDate.month == -1 || endDate.day == -1 || endDate.hour == -1 || endDate.minute == -1
         ) {
-            Toast.makeText(this, "Please fill all the time and date fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Please fill all the time and date fields", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -152,43 +183,76 @@ class AddAct : AppCompatActivity() {
         }
 
         if(!checked){
-            Toast.makeText(this, "Please check at least one day", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Please check at least one day", Toast.LENGTH_SHORT).show()
             return
         }
 
         // insertar curso
+        clean()
+        Toast.makeText(activity, "Añadiendo curso", Toast.LENGTH_SHORT).show()
+        // finish()
 
-        Toast.makeText(this, "Añadiendo curso", Toast.LENGTH_SHORT).show()
-        finish()
+        val since : Calendar = Calendar.getInstance()
+        since.set(Calendar.YEAR, startDate.year)
+        since.set(Calendar.MONTH, startDate.month)
+        since.set(Calendar.DAY_OF_MONTH, startDate.day)
+
+        val until : Calendar = Calendar.getInstance()
+        until.set(Calendar.YEAR, endDate.year)
+        until.set(Calendar.MONTH, endDate.month)
+        until.set(Calendar.DAY_OF_MONTH, endDate.day)
+
+        //val schedule : Schedule = Schedule(0, startDate.hour, startDate.minute, endDate.hour, endDate.minute, since, until,
+        // daysArray[1], daysArray[2],daysArray[3], daysArray[4], daysArray[5], daysArray[6], daysArray[0])
+
+        // val course: Course = Course(0,titulo,location, schedule)
+        val course : Course = Course(0, titulo, location)
+
+        lifecycleScope.launch {
+            viewModel.insertCourse(course)
+        }
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout.fragment_courses, container, false)
+        _binding =  FragmentAddBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         super.onCreate(savedInstanceState)
-        binding = ActivityAddBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        binding.cancelButton.setOnClickListener {
-            finish()
-        }
         binding.addButton.setOnClickListener {
             handleSubmit()
         }
 
         binding.startTime.inputType
         binding.startTime.setOnClickListener{
-           handleTime(true)
+            handleTime(true)
         }
         binding.endTime.setOnClickListener{
-           handleTime(false)
+            handleTime(false)
         }
         binding.startDate.setOnClickListener{
-           handleDate(true)
+            handleDate(true)
         }
         binding.endDate.setOnClickListener{
             handleDate(false)
         }
     }
+
 
 }
