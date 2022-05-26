@@ -1,5 +1,6 @@
 package com.example.shchoolmate
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -31,9 +32,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.add){
             // Toast.makeText(this, "No hay suficiente cantidad", Toast.LENGTH_SHORT).show()
-            val fragmentManager = supportFragmentManager
-            val dialog = Add()
-            dialog.show(supportFragmentManager, "Add Course")
+            //val fragmentManager = supportFragmentManager
+            val intent = Intent(this, AddAct::class.java)
+            this.startActivity(intent)
+            //val dialog = Add()
+            //dialog.show(supportFragmentManager, "Add Course")
         }
         return super.onOptionsItemSelected(item)
     }
