@@ -163,6 +163,7 @@ class Add : Fragment() {
             binding.wednesday.isChecked,binding.thursday.isChecked,binding.friday.isChecked,
             binding.saturday.isChecked)
 
+
         if(titulo == "" || location == ""){
             Toast.makeText(activity, "Please fill all the text fields", Toast.LENGTH_SHORT).show()
             return
@@ -188,25 +189,14 @@ class Add : Fragment() {
         }
 
         // insertar curso
-        clean()
         Toast.makeText(activity, "Añadiendo curso", Toast.LENGTH_SHORT).show()
         // finish()
 
-        val since : Calendar = Calendar.getInstance()
-        since.set(Calendar.YEAR, startDate.year)
-        since.set(Calendar.MONTH, startDate.month)
-        since.set(Calendar.DAY_OF_MONTH, startDate.day)
+        val course  = Course(0, titulo, location, startDate.hour, startDate.minute, endDate.hour, endDate.minute,
+            startDate.year, startDate.month, startDate.day, endDate.year, endDate.month, endDate.day,
+            daysArray[0], daysArray[1], daysArray[2],daysArray[3], daysArray[4], daysArray[5], daysArray[6])
 
-        val until : Calendar = Calendar.getInstance()
-        until.set(Calendar.YEAR, endDate.year)
-        until.set(Calendar.MONTH, endDate.month)
-        until.set(Calendar.DAY_OF_MONTH, endDate.day)
-
-        //val schedule : Schedule = Schedule(0, startDate.hour, startDate.minute, endDate.hour, endDate.minute, since, until,
-        // daysArray[1], daysArray[2],daysArray[3], daysArray[4], daysArray[5], daysArray[6], daysArray[0])
-
-        // val course: Course = Course(0,titulo,location, schedule)
-        val course : Course = Course(0, titulo, location)
+        clean()
 
         lifecycleScope.launch {
             viewModel.insertCourse(course)
