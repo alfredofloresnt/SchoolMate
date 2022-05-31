@@ -20,4 +20,9 @@
         android:name="com.example.shchoolmate.Calculate"
         android:label="fragment_calculate"
         tools:layout="@layout/fragment_calculate" />
+    <fragment
+        android:id="@+id/add"
+        android:name="com.example.shchoolmate.Add"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" />
 </navigation>
