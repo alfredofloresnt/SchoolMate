@@ -8,6 +8,56 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTotal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btnAddExam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="232dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_baseline_add_24"
+                app:layout_constraintBottom_toBottomOf="@+id/textExams"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textExams" />
+
+            <TextView
+                android:id="@+id/textExams"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exams"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="40dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvExams"
+                android:layout_width="409dp"
+                android:layout_height="587dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textExams" />
+
+            <EditText
+                android:id="@+id/editTextExamWeight"
+                android:layout_width="113dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/textExams"
+                app:layout_constraintStart_toEndOf="@+id/textExams" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
     <TextView
         android:id="@+id/textCourseSelected"
         android:layout_width="wrap_content"
@@ -37,5 +87,18 @@
         app:icon="@drawable/ic_baseline_arrow_forward_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="42sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBackCourse" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

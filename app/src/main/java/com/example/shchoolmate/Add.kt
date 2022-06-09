@@ -24,7 +24,8 @@ class Add : Fragment() {
 
     private val viewModel: CoursesViewModel by activityViewModels {
         CoursesViewModelFactory(
-            (activity?.application as MyInitApp).database.courseDao()
+            (activity?.application as MyInitApp).database.courseDao(),
+            (activity?.application as MyInitApp).database.weightingDao()
         )
     }
 
@@ -189,7 +190,7 @@ class Add : Fragment() {
         }
 
         // insertar curso
-        Toast.makeText(activity, "Añadiendo curso", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "Adding course", Toast.LENGTH_SHORT).show()
         // finish()
 
         val course  = Course(0, titulo, location, startDate.hour, startDate.minute, endDate.hour, endDate.minute,
@@ -199,7 +200,13 @@ class Add : Fragment() {
         clean()
 
         lifecycleScope.launch {
-            viewModel.insertCourse(course)
+            val id = viewModel.insertCourse(course)
+            var idW = viewModel.insertWeighing(Weighing(0, id.toInt(), "Exams", 0.0))
+            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 1", 0.0, 0.33))
+            idW = viewModel.insertWeighing(Weighing(0, id.toInt(), "Homework", 0.0))
+            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 2", 0.0, 0.33))
+            idW = viewModel.insertWeighing(Weighing(0, id.toInt(), "Class activities", 0.0))
+            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 3", 0.0, 0.33))
         }
 
     }

@@ -15,7 +15,7 @@ interface CourseDao {
 
     // Insert course
     @Insert
-    suspend fun insertCourse(course: Course)
+    suspend fun insertCourse(course: Course): Long
 
     // Delete course
     @Delete
