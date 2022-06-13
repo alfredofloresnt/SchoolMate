@@ -202,11 +202,11 @@ class Add : Fragment() {
         lifecycleScope.launch {
             val id = viewModel.insertCourse(course)
             var idW = viewModel.insertWeighing(Weighing(0, id.toInt(), "Exams", 0.0))
-            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 1", 0.0, 0.33))
+            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 1", 0.0, 0.0))
             idW = viewModel.insertWeighing(Weighing(0, id.toInt(), "Homework", 0.0))
-            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 2", 0.0, 0.33))
-            idW = viewModel.insertWeighing(Weighing(0, id.toInt(), "Class activities", 0.0))
-            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 3", 0.0, 0.33))
+            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 2", 0.0, 0.0))
+            idW = viewModel.insertWeighing(Weighing(0, id.toInt(), "Activity", 0.0))
+            viewModel.insertActivityScore(ActivityScore(0, idW.toInt(),"Tarea 3", 0.0, 0.0))
         }
 
     }

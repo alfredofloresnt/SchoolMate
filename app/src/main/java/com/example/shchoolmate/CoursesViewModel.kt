@@ -25,6 +25,7 @@ class CoursesViewModel(private val courseDao: CourseDao, private val weighingDao
     suspend fun getWeighingsByIdCourseAndName(id: Int, name: String): Weighing = weighingDao.getWeighingsByIdCourseAndName(id, name)
 
     suspend fun updateWeight(id: Int, value: Double) = weighingDao.updateWeight(id, value)
+    suspend fun updateWeightByCourseName(id: Int, name: String, value: Double) = weighingDao.updateWeightByCourseName(id, name, value)
 
     suspend fun updateActivityWeight(id: Int, value: Double) = weighingDao.updateActivityWeight(id, value)
 
@@ -38,6 +39,16 @@ class CoursesViewModel(private val courseDao: CourseDao, private val weighingDao
 
     suspend fun insertActivityScore(activityScore: ActivityScore): Long = weighingDao.insertActivityScore(activityScore)
 
+    var a = 0.0
+    var b = 0.0
+
+    fun setValA(value: Double) {
+        a = value
+    }
+
+    fun setValB(value: Double) {
+        b = value
+    }
 
 
     var _activeDate: Calendar = Calendar.getInstance()

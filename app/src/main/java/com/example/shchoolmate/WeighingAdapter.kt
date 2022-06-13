@@ -29,8 +29,7 @@ class WeighingAdapter (val context: Context?, var activities: List<ActivityScore
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding.apply {
-            textName.text = activities[position].name
-            textWeight.text = (weight * 100.0).toString() + "%"
+            textName.text = activities[position].name + "(" + ((weight * 100.0).toInt()).toString() + "%" + ")"
             editWeight.setText(activities[position].weight.toString())
             itemListener(holder, activities[position])
 
