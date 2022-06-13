@@ -24,7 +24,8 @@ class Courses : Fragment() {
 
     private val viewModel: CoursesViewModel by activityViewModels {
         CoursesViewModelFactory(
-            (activity?.application as MyInitApp).database.courseDao()
+            (activity?.application as MyInitApp).database.courseDao(),
+            (activity?.application as MyInitApp).database.weightingDao()
         )
     }
 
