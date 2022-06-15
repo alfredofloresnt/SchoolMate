@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mov"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="#00FFFFFF">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/hourText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hour: "
+            android:textSize="10sp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/gray" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/courseAbove"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/gray"
+            android:textSize="11sp"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@+id/courseAbove" />
+
+        <TextView
+            android:id="@+id/courseBelow"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="0dp"
+            android:background="@color/gray"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/todos"
+        android:icon="@drawable/ic_baseline_check_24"
+        android:title="TODOS" />
+    <item
+        android:id="@+id/courses"
+        android:icon="@drawable/ic_baseline_school_24"
+        android:title="Courses" />
+    <item
+        android:id="@+id/calculate"
+        android:icon="@drawable/ic_baseline_calculate_24"
+        android:title="Calculate" />
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="Add" />
+</menu>
