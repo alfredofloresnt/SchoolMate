@@ -51,17 +51,20 @@ class Todos : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch{
-            val adapter = TodoAdapter(viewModel.getAllTodos())
-            binding.rvTodos.adapter=adapter
-            binding.rvTodos.layoutManager= LinearLayoutManager(activity)
-        }
+        updateTodo()
 
         binding.btntodo.setOnClickListener {
             viewAlert()
         }
     }
 
+    fun updateTodo(){
+        lifecycleScope.launch{
+            val adapter = TodoAdapter(viewModel.getAllTodos())
+            binding.rvTodos.adapter=adapter
+            binding.rvTodos.layoutManager= LinearLayoutManager(activity)
+        }
+    }
     fun viewAlert() {
         val builder = AlertDialog.Builder(activity)
         val inflater = layoutInflater
@@ -72,12 +75,13 @@ class Todos : Fragment() {
         builder.setView(dialogLayout)
         builder.setPositiveButton("Add") { dialogInterface, i ->
             lifecycleScope.launch {
-                val titulo = editTextTitle.toString()
-                val comment = editTextComment.toString()
+                val titulo = editTextTitle.text.toString()
+                val comment = editTextComment.text.toString()
                 val date = getCurrentDateTime()
                 val dateInString = date.toString("yyyy/MM/dd")
                 lifecycleScope.launch {
                     viewModel.insertTodo(Todo(0,titulo,comment,dateInString))
+                    updateTodo()
                 }
             }
         }
