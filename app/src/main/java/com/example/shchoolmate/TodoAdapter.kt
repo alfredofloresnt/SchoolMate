@@ -22,6 +22,7 @@ class TodoAdapter (var todos: List<Todo>): RecyclerView.Adapter<TodoAdapter.View
         holder.binding.apply {
             tituloRecycle.text = todos[position].title
             commentRecycle.text = todos[position].comments
+            dateRecycle.text = todos[position].date
         }
 
     }
