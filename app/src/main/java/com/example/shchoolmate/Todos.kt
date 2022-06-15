@@ -1,11 +1,14 @@
 package com.example.shchoolmate
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,19 +57,34 @@ class Todos : Fragment() {
             binding.rvTodos.layoutManager= LinearLayoutManager(activity)
         }
 
-
         binding.btntodo.setOnClickListener {
-            val titulo = binding.titulo.text.toString()
-            val comment = binding.coment.text.toString()
-            val date = getCurrentDateTime()
-            val dateInString = date.toString("yyyy/MM/dd")
-            lifecycleScope.launch {
-
-
-                viewModel.insertTodo(Todo(0,titulo,comment,dateInString))
-            }
+            viewAlert()
         }
     }
+
+    fun viewAlert() {
+        val builder = AlertDialog.Builder(activity)
+        val inflater = layoutInflater
+        builder.setTitle("Add Task")
+        val dialogLayout = inflater.inflate(R.layout.modal_todos, null)
+        val editTextTitle  = dialogLayout.findViewById<EditText>(R.id.titulo_modal)
+        val editTextComment = dialogLayout.findViewById<EditText>(R.id.modal_coment)
+        builder.setView(dialogLayout)
+        builder.setPositiveButton("Add") { dialogInterface, i ->
+            lifecycleScope.launch {
+                val titulo = editTextTitle.toString()
+                val comment = editTextComment.toString()
+                val date = getCurrentDateTime()
+                val dateInString = date.toString("yyyy/MM/dd")
+                lifecycleScope.launch {
+                    viewModel.insertTodo(Todo(0,titulo,comment,dateInString))
+                }
+            }
+        }
+        builder.setNegativeButton("Cancel") { dialogInterface, i -> Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show() }
+        builder.show()
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
