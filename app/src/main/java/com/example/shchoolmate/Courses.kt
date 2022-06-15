@@ -122,14 +122,14 @@ class Courses : Fragment() {
 
                 if(curMin == 0){
                     hours[curHour].down = true
-                    hours[curHour].title = if (first) course.name else ""
+                    hours[curHour].title = if (first) course.name + "  [${course.location}]" else ""
                     curMin = 30
                     if (first) {
                         first = false
                     }
                 }else if(curMin == 30) {
                     hours[curHour + 1].up = true
-                    hours[curHour + 1].title = if (first) course.name else ""
+                    hours[curHour + 1].title = if (first) course.name + "  [${course.location}]" else ""
                     curHour++
                     curMin = 0
                 }
