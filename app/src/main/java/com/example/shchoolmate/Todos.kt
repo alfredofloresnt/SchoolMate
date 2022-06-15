@@ -59,7 +59,7 @@ class Todos : Fragment() {
             val titulo = binding.titulo.text.toString()
             val comment = binding.coment.text.toString()
             val date = getCurrentDateTime()
-            val dateInString = date.toString("yyyy/MM/dd HH:mm:ss")
+            val dateInString = date.toString("yyyy/MM/dd")
             lifecycleScope.launch {
 
 
