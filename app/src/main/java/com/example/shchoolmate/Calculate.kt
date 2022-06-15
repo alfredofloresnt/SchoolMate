@@ -47,31 +47,33 @@ class Calculate : Fragment() {
         lifecycleScope.launch {
             var courses = viewModel.getAllCourses()
             //viewModel.insertCourse(Course(0, name = "My course 1", location = "a random ZOOM link"))
-            updateCourse(courses[selectedCourseIndex])
-            //examsWeightListener(courses[selectedCourseIndex])
-            binding.buttonNextCourse.setOnClickListener {
-                selectedCourseIndex = (selectedCourseIndex + 1) % courses.size
+            if (courses.isNotEmpty()) {
                 updateCourse(courses[selectedCourseIndex])
-            }
-            binding.buttonBackCourse.setOnClickListener {
-                selectedCourseIndex = (selectedCourseIndex - 1 % courses.size + courses.size) % courses.size
-                updateCourse(courses[selectedCourseIndex])
-            }
-            binding.btnAddExam.setOnClickListener{
-                viewAlert(courses[selectedCourseIndex], "Exams")
-            }
-            /*
-            binding.btnAddActivity.setOnClickListener {
-                viewAlert(courses[selectedCourseIndex], "Activity")
-            }*/
-            /*
-            binding.btnAddHomework.setOnClickListener {
-                viewAlert(courses[selectedCourseIndex], "Homework")
-            }
-            */
-            binding.buttonCalculate.setOnClickListener {
-                //calculateExams(courses[selectedCourseIndex])
-                calculateExams(courses[selectedCourseIndex])
+                //examsWeightListener(courses[selectedCourseIndex])
+                binding.buttonNextCourse.setOnClickListener {
+                    selectedCourseIndex = (selectedCourseIndex + 1) % courses.size
+                    updateCourse(courses[selectedCourseIndex])
+                }
+                binding.buttonBackCourse.setOnClickListener {
+                    selectedCourseIndex = (selectedCourseIndex - 1 % courses.size + courses.size) % courses.size
+                    updateCourse(courses[selectedCourseIndex])
+                }
+                binding.btnAddExam.setOnClickListener{
+                    viewAlert(courses[selectedCourseIndex], "Exams")
+                }
+                /*
+                binding.btnAddActivity.setOnClickListener {
+                    viewAlert(courses[selectedCourseIndex], "Activity")
+                }*/
+                /*
+                binding.btnAddHomework.setOnClickListener {
+                    viewAlert(courses[selectedCourseIndex], "Homework")
+                }
+                */
+                binding.buttonCalculate.setOnClickListener {
+                    //calculateExams(courses[selectedCourseIndex])
+                    calculateExams(courses[selectedCourseIndex])
+                }
             }
         }
 
@@ -87,10 +89,8 @@ class Calculate : Fragment() {
         builder.setView(dialogLayout)
         builder.setPositiveButton("Save") { dialogInterface, i ->
             lifecycleScope.launch {
-                Toast.makeText(context, "EditTextName is " + editTextName.text.toString(), Toast.LENGTH_SHORT).show()
                 var weighing = viewModel.getWeighingsByIdCourseAndName(course.id, type)
                 viewModel.insertActivityScore(ActivityScore(0, weighing.id, editTextName.text.toString(), 0.0, 0.0))
-                Toast.makeText(context, "idWeighing " + weighing.id.toString(), Toast.LENGTH_SHORT).show()
                 updateCourse(course)
             }
         }
@@ -185,7 +185,6 @@ class Calculate : Fragment() {
             binding.textTotal.text = (total).toInt().toString() + "%"
 
         }
-        Toast.makeText(context, "a =  " + total.toString(), Toast.LENGTH_SHORT).show()
     }
 /*
     fun calculateActivities(course: Course) {
